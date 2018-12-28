@@ -2,10 +2,14 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import LoginForm from "./components/Auth/LoginForm.vue";
+import SignUpForm from "./components/Auth/SignUpForm.vue";
+import Secure from "./components/Auth/Secure.vue";
+import Produce from "./components/Produce/Produce.vue";
+import store from "./store";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: "/",
@@ -18,6 +22,24 @@ export default new Router({
       component: LoginForm
     },
     {
+      path: "/signup",
+      name: "signup",
+      component: SignUpForm
+    },
+    {
+      path: "/produce",
+      name: "produce",
+      component: Produce
+    },
+    {
+      path: "/secure",
+      name: "secure",
+      component: Secure,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: "/about",
       name: "about",
       // route level code-splitting
@@ -28,3 +50,17 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if(store.getters.isLoggedIn) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
+})
+
+export default router
