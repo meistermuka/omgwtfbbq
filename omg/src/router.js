@@ -4,7 +4,7 @@ import Home from "./views/Home.vue";
 import LoginForm from "./components/Auth/LoginForm.vue";
 import SignUpForm from "./components/Auth/SignUpForm.vue";
 import Secure from "./components/Auth/Secure.vue";
-import Produce from "./components/Produce/Produce.vue";
+import Produce from "./views/Produce.vue";
 import store from "./store";
 
 Vue.use(Router);

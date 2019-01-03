@@ -1,7 +1,7 @@
 <template>
     <v-content>
-        <v-layout justify-center>
-            <v-flex xs12 sm6 md4>
+        <v-layout justify-center align-center>
+            <v-flex xs12 sm6 md6>
                 <v-toolbar dark color="teal accent-4">
                     <v-toolbar-title>Produce Items</v-toolbar-title>
                     <v-spacer></v-spacer>
@@ -11,20 +11,13 @@
                 </v-toolbar>
                 <v-card>
                    <v-container fluid grid-list-md>
-                       <v-layout row wrap>
+                       <v-layout wrap>
                            <v-flex
+                            d-flex
+                            xs12 sm6 md3
                             v-for="i in 10"
                             :key="i">
-                            <v-card>
-                                <v-container fill-height fluid>
-                                    <v-layout fill-height>
-                                        <v-flex xs12 align-end flexbox>
-                                            <v-img src="./fruit.svg"></v-img>
-                                            <v-card-text>text: {{ i }}</v-card-text>
-                                        </v-flex>
-                                    </v-layout>
-                                </v-container>
-                            </v-card>
+                            <ProduceItem :produceName=i />                            
                            </v-flex>
                        </v-layout>
                    </v-container>
@@ -38,11 +31,12 @@
 </template>
 
 <script>
-export default {
+import ProduceItem from "@/components/Produce/ProduceItem.vue";
 
+export default {
+    name: "Produce",
+    components: {
+        ProduceItem
+    }    
 }
 </script>
-
-<style>
-
-</style>
